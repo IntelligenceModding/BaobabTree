@@ -8,8 +8,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -81,22 +81,22 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.HANGING_SIGNS)
                 .add(key(ModItems.BAOBAB_HANGING_SIGN.get()));
 
-        tag(Tags.Items.FENCE_GATES_WOODEN)
+        tag(Tags.BlockItems.FENCE_GATES_WOODEN.item())
                 .add(key(ModBlocks.BAOBAB_FENCE_GATE.get().asItem()));
 
-        tag(Tags.Items.FENCES_WOODEN)
+        tag(Tags.BlockItems.FENCES_WOODEN.item())
                 .add(key(ModBlocks.BAOBAB_FENCE.get().asItem()));
 
-        tag(Tags.Items.NATURAL_LOGS)
+        tag(Tags.BlockItems.NATURAL_LOGS.item())
                 .add(key(ModBlocks.BAOBAB_LOG.get().asItem()));
 
-        tag(Tags.Items.STRIPPED_LOGS)
+        tag(Tags.BlockItems.STRIPPED_LOGS.item())
                 .add(key(ModBlocks.STRIPPED_BAOBAB_LOG.get().asItem()));
 
-        tag(Tags.Items.STRIPPED_WOODS)
+        tag(Tags.BlockItems.STRIPPED_WOODS.item())
                 .add(key(ModBlocks.STRIPPED_BAOBAB_WOOD.get().asItem()));
 
-        tag(Tags.Items.NATURAL_WOODS)
+        tag(Tags.BlockItems.NATURAL_WOODS.item())
                 .add(key(ModBlocks.BAOBAB_WOOD.get().asItem()));
 
         tag(Tags.Items.FOODS_FRUIT)

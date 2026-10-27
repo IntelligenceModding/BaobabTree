@@ -30,7 +30,7 @@ public final class ModPlacedFeatures {
     }
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
-        var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        var configuredFeatures = context.lookup(Registries.FEATURE);
 
         register(context, YOUNG_BAOBAB_PLACED_KEY, configuredFeatures.getOrThrow(ModTreeConfiguredFeatures.YOUNG_BAOBAB_KEY),
                 List.of(
@@ -103,7 +103,7 @@ public final class ModPlacedFeatures {
 
     private static void register(BootstrapContext<PlacedFeature> context,
                                  ResourceKey<PlacedFeature> key,
-                                 Holder<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> configuration,
+                                 Holder<net.minecraft.world.level.levelgen.feature.Feature> configuration,
                                  List<PlacementModifier> modifiers) {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }

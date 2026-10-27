@@ -7,11 +7,11 @@ import de.artemis.baobabtree.common.block.BaobabHangingPodBlock;
 import de.artemis.baobabtree.common.block.BaobabLitterBlock;
 import de.artemis.baobabtree.common.block.BaobabSaplingBlock;
 import de.artemis.baobabtree.common.block.BaobabStandingSignBlock;
-import de.artemis.baobabtree.common.block.BaobabStrippableLogBlock;
 import de.artemis.baobabtree.common.block.BaobabWallHangingSignBlock;
 import de.artemis.baobabtree.common.block.BaobabWallSignBlock;
 import de.artemis.baobabtree.common.block.TreeRootBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
@@ -22,12 +22,11 @@ import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.ShelfBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.TintedParticleLeavesBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -40,11 +39,11 @@ public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(BaobabTree.MOD_ID);
 
     public static final DeferredBlock<Block> BAOBAB_LOG = registerBlock("baobab_log",
-            properties -> new BaobabStrippableLogBlock(properties, () -> ModBlocks.STRIPPED_BAOBAB_LOG.get()),
+            RotatedPillarBlock::new,
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.ACACIA_LOG));
 
     public static final DeferredBlock<Block> BAOBAB_WOOD = registerBlock("baobab_wood",
-            properties -> new BaobabStrippableLogBlock(properties, () -> ModBlocks.STRIPPED_BAOBAB_WOOD.get()),
+            RotatedPillarBlock::new,
             () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.ACACIA_WOOD));
 
     public static final DeferredBlock<Block> STRIPPED_BAOBAB_LOG = registerBlock("stripped_baobab_log",
@@ -152,7 +151,7 @@ public final class ModBlocks {
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> blockFactory, Supplier<BlockBehaviour.Properties> properties) {
         DeferredBlock<T> block = BLOCKS.registerBlock(name, blockFactory, properties);
-        ModItems.ITEMS.registerSimpleBlockItem(block);
+        ModItems.ITEMS.registerSimpleBlockItem(block, propertiesForItem -> ModItems.blockItemProperties(name, propertiesForItem));
         return block;
     }
 

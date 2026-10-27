@@ -29,6 +29,7 @@ public class BaobabTree {
         ModParticles.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         modEventBus.addListener(DataGenerators::gatherClientData);
+        modEventBus.addListener(DataGenerators::gatherRegistries);
         modEventBus.addListener(DataGenerators::gatherServerData);
         modEventBus.addListener(BaobabTree::onBlockEntityTypeAddBlocks);
         NeoForge.EVENT_BUS.addListener(BaobabTreeCommands::register);

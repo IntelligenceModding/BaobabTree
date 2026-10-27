@@ -1,0 +1,94 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "baobabtree:baobab_fruit_pod",
+        "state": {
+          "age": "0"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:survives_explosion"
+          },
+          "name": "baobabtree:baobab_fruit"
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "baobabtree:baobab_fruit_pod",
+        "state": {
+          "age": "1"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:survives_explosion"
+          },
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 2
+          },
+          "name": "baobabtree:baobab_fruit"
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "baobabtree:baobab_fruit_pod",
+        "state": {
+          "age": "2"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:survives_explosion"
+          },
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 4
+          },
+          "name": "baobabtree:baobab_fruit"
+        }
+      ],
+      "rolls": 1
+    },
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "baobabtree:baobab_fruit_pod",
+        "state": {
+          "age": "3"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:survives_explosion"
+          },
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 6
+          },
+          "name": "baobabtree:baobab_fruit"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "baobabtree:blocks/baobab_fruit_pod"
+}

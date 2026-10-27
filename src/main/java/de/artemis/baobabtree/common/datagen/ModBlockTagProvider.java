@@ -9,12 +9,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
-import net.minecraft.world.level.block.Block;
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.world.level.block.Block;
 
 public class ModBlockTagProvider extends BlockTagsProvider {
     private static final TagKey<Block> SAPLINGS = BlockTags.create(Identifier.withDefaultNamespace("saplings"));
@@ -91,25 +91,25 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(key(ModBlocks.STRIPPED_BAOBAB_LOG.get()))
                 .add(key(ModBlocks.STRIPPED_BAOBAB_WOOD.get()));
 
-        tag(Tags.Blocks.FENCE_GATES_WOODEN)
+        tag(Tags.BlockItems.FENCE_GATES_WOODEN.block())
                 .add(key(ModBlocks.BAOBAB_FENCE_GATE.get()));
 
-        tag(Tags.Blocks.FENCES_WOODEN)
+        tag(Tags.BlockItems.FENCES_WOODEN.block())
                 .add(key(ModBlocks.BAOBAB_FENCE.get()));
 
-        tag(Tags.Blocks.NATURAL_LOGS)
+        tag(Tags.BlockItems.NATURAL_LOGS.block())
                 .add(key(ModBlocks.BAOBAB_LOG.get()));
 
-        tag(Tags.Blocks.OVERWORLD_NATURAL_LOGS)
+        tag(Tags.BlockItems.OVERWORLD_NATURAL_LOGS.block())
                 .add(key(ModBlocks.BAOBAB_LOG.get()));
 
-        tag(Tags.Blocks.STRIPPED_LOGS)
+        tag(Tags.BlockItems.STRIPPED_LOGS.block())
                 .add(key(ModBlocks.STRIPPED_BAOBAB_LOG.get()));
 
-        tag(Tags.Blocks.STRIPPED_WOODS)
+        tag(Tags.BlockItems.STRIPPED_WOODS.block())
                 .add(key(ModBlocks.STRIPPED_BAOBAB_WOOD.get()));
 
-        tag(Tags.Blocks.NATURAL_WOODS)
+        tag(Tags.BlockItems.NATURAL_WOODS.block())
                 .add(key(ModBlocks.BAOBAB_WOOD.get()));
 
         tag(BlockTags.PLANKS)

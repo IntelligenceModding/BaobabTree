@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'net.neoforged.moddev' version '2.0.148'
     id 'idea'
 }
 
@@ -9,7 +9,7 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-version = minecraft_version + "-" + mod_version
+version = "${mod_version}-neoforge-mc${minecraft_version}"
 group = mod_group_id
 
 repositories {
@@ -81,6 +81,11 @@ neoForge {
     }
 }
 
+// The generators share a working directory and log files.
+tasks.named('runClientData').configure {
+    mustRunAfter 'runServerData'
+}
+
 sourceSets.main.resources.setSrcDirs([
         'src/main/resources',
         clientGeneratedResources,
@@ -96,11 +101,12 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 }
 
-var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
@@ -110,20 +116,14 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_description        : mod_description
     ]
     inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand replaceProperties
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
-
-sourceSets.main.resources.srcDir generateModMetadata
-neoForge.ideSyncTask generateModMetadata
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-}
-
-tasks.named('processResources', ProcessResources).configure {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 publishing {

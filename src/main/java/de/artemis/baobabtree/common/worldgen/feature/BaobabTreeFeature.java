@@ -1,20 +1,21 @@
 package de.artemis.baobabtree.common.worldgen.feature;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import de.artemis.baobabtree.common.registry.ModFeatures;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.WorldGenLevel;
 
-public class BaobabTreeFeature extends Feature<NoneFeatureConfiguration> {
-    private final BaobabTreeGenerator.Variant variant;
-
-    public BaobabTreeFeature(Codec<NoneFeatureConfiguration> codec, BaobabTreeGenerator.Variant variant) {
-        super(codec);
-        this.variant = variant;
+public record BaobabTreeFeature(BaobabTreeGenerator.Variant variant) implements Feature {
+    @Override
+    public MapCodec<BaobabTreeFeature> codec() {
+        return ModFeatures.codec(variant);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        return BaobabTreeGenerator.generate(context.level(), context.origin(), context.random(), variant);
+    public boolean place(WorldGenLevel level, ChunkGenerator chunkGenerator, RandomSource random, BlockPos origin) {
+        return BaobabTreeGenerator.generate(level, origin, random, variant);
     }
 }

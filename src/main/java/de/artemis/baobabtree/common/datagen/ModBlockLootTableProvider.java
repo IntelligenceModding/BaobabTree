@@ -4,22 +4,22 @@ import de.artemis.baobabtree.common.block.BaobabFruitPodBlock;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
-    protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
+    protected ModBlockLootTableProvider(LootTableSubProvider.Context registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
@@ -59,31 +59,27 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     private LootTable.Builder createFruitPodPlantDrops() {
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BAOBAB_FRUIT_POD.get())
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 0)))
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .when(MatchBlock.blockMatches(blocks, ModBlocks.BAOBAB_FRUIT_POD.get(), StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 0)))
                         .add(applyExplosionCondition(ModBlocks.BAOBAB_FRUIT_POD.get(), LootItem.lootTableItem(ModItems.BAOBAB_FRUIT.get()))))
                 .withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BAOBAB_FRUIT_POD.get())
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 1)))
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .when(MatchBlock.blockMatches(blocks, ModBlocks.BAOBAB_FRUIT_POD.get(), StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 1)))
                         .add(applyExplosionCondition(ModBlocks.BAOBAB_FRUIT_POD.get(),
                                 LootItem.lootTableItem(ModItems.BAOBAB_FRUIT.get())
-                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))))))
+                                        .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(2))))))
                 .withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BAOBAB_FRUIT_POD.get())
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 2)))
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .when(MatchBlock.blockMatches(blocks, ModBlocks.BAOBAB_FRUIT_POD.get(), StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 2)))
                         .add(applyExplosionCondition(ModBlocks.BAOBAB_FRUIT_POD.get(),
                                 LootItem.lootTableItem(ModItems.BAOBAB_FRUIT.get())
-                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))))))
+                                        .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(4))))))
                 .withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.BAOBAB_FRUIT_POD.get())
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 3)))
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .when(MatchBlock.blockMatches(blocks, ModBlocks.BAOBAB_FRUIT_POD.get(), StatePropertiesPredicate.Builder.properties().hasProperty(BaobabFruitPodBlock.AGE, 3)))
                         .add(applyExplosionCondition(ModBlocks.BAOBAB_FRUIT_POD.get(),
                                 LootItem.lootTableItem(ModItems.BAOBAB_FRUIT.get())
-                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(6.0F))))));
+                                        .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(6))))));
     }
 
     @Override

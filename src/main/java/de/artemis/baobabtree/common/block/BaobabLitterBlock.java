@@ -1,6 +1,5 @@
 package de.artemis.baobabtree.common.block;
 
-import com.mojang.serialization.MapCodec;
 import de.artemis.baobabtree.common.block.entity.BaobabLitterBlockEntity;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
@@ -11,28 +10,27 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LeafLitterBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BaobabLitterBlock extends LeafLitterBlock implements EntityBlock {
-    public static final MapCodec<LeafLitterBlock> CODEC = simpleCodec(BaobabLitterBlock::new);
     public static final IntegerProperty AMOUNT = IntegerProperty.create("amount", 1, 4);
     public static final BooleanProperty HAS_SMALL = BooleanProperty.create("has_small");
     public static final BooleanProperty HAS_MEDIUM = BooleanProperty.create("has_medium");
@@ -44,11 +42,6 @@ public class BaobabLitterBlock extends LeafLitterBlock implements EntityBlock {
                 .setValue(HAS_SMALL, false)
                 .setValue(HAS_MEDIUM, false)
                 .setValue(HAS_LARGE, false));
-    }
-
-    @Override
-    protected @NotNull MapCodec<LeafLitterBlock> codec() {
-        return CODEC;
     }
 
     @Override

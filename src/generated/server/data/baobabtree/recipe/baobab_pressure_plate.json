@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "baobabtree:baobab_planks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "baobabtree:baobab_pressure_plate"
+  }
+}

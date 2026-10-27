@@ -1,6 +1,5 @@
 package de.artemis.baobabtree.common.block;
 
-import com.mojang.serialization.MapCodec;
 import de.artemis.baobabtree.common.registry.ModItems;
 import de.artemis.baobabtree.common.util.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -8,24 +7,24 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -43,7 +42,6 @@ public class BaobabHangingPodBlock extends Block implements Fallable {
     };
 
     private final int sizeIndex;
-    private final MapCodec<BaobabHangingPodBlock> codec;
 
     public BaobabHangingPodBlock(BlockBehaviour.Properties properties) {
         this(properties, 0);
@@ -52,13 +50,7 @@ public class BaobabHangingPodBlock extends Block implements Fallable {
     public BaobabHangingPodBlock(BlockBehaviour.Properties properties, int sizeIndex) {
         super(properties);
         this.sizeIndex = sizeIndex;
-        this.codec = simpleCodec(p -> new BaobabHangingPodBlock(p, sizeIndex));
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends Block> codec() {
-        return codec;
     }
 
     @Override

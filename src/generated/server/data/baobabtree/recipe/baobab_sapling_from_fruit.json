@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "baobabtree:baobab_fruit",
+    "baobabtree:baobab_fruit",
+    "baobabtree:baobab_fruit",
+    "baobabtree:baobab_fruit"
+  ],
+  "result": {
+    "id": "baobabtree:baobab_sapling"
+  }
+}

@@ -1,6 +1,5 @@
 package de.artemis.baobabtree.common.block;
 
-import com.mojang.serialization.MapCodec;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -9,26 +8,27 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.BonemealSource;
+import net.minecraft.world.level.block.Fallable;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Fallable;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -36,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BaobabFruitPodBlock extends Block implements BonemealableBlock {
-    public static final MapCodec<BaobabFruitPodBlock> CODEC = simpleCodec(BaobabFruitPodBlock::new);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final int RIPE_FALL_MIN_DELAY_TICKS = 30 * 20;
@@ -54,11 +53,6 @@ public class BaobabFruitPodBlock extends Block implements BonemealableBlock {
         registerDefaultState(stateDefinition.any()
                 .setValue(AGE, 0)
                 .setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends Block> codec() {
-        return CODEC;
     }
 
     @Override
@@ -196,7 +190,8 @@ public class BaobabFruitPodBlock extends Block implements BonemealableBlock {
     @Override
     public boolean isValidBonemealTarget(@NotNull LevelReader level,
                                          @NotNull BlockPos pos,
-                                         @NotNull BlockState state) {
+                                         @NotNull BlockState state,
+                                         @NotNull BonemealSource source) {
         return state.getValue(AGE) < 3;
     }
 
@@ -204,7 +199,8 @@ public class BaobabFruitPodBlock extends Block implements BonemealableBlock {
     public boolean isBonemealSuccess(@NotNull Level level,
                                      @NotNull RandomSource random,
                                      @NotNull BlockPos pos,
-                                     @NotNull BlockState state) {
+                                     @NotNull BlockState state,
+                                     @NotNull BonemealSource source) {
         return state.getValue(AGE) < 3;
     }
 
@@ -212,7 +208,8 @@ public class BaobabFruitPodBlock extends Block implements BonemealableBlock {
     public void performBonemeal(@NotNull ServerLevel level,
                                 @NotNull RandomSource random,
                                 @NotNull BlockPos pos,
-                                @NotNull BlockState state) {
+                                @NotNull BlockState state,
+                                @NotNull BonemealSource source) {
         int age = state.getValue(AGE);
         if (age < 3) {
             int newAge = age + 1;

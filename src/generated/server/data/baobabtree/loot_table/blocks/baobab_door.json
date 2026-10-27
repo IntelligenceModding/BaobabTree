@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:match_block",
+            "blocks": "baobabtree:baobab_door",
+            "state": {
+              "half": "lower"
+            }
+          },
+          "name": "baobabtree:baobab_door"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "baobabtree:blocks/baobab_door"
+}
