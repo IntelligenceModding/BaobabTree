@@ -1,7 +1,334 @@
 {
-  "parent": "minecraft:block/template_wall_hanging_sign",
+  "parent": "block/block",
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#all",
+          "uv": [
+            1,
+            13,
+            8,
+            14
+          ]
+        },
+        "east": {
+          "texture": "#all",
+          "uv": [
+            8,
+            8,
+            9,
+            13
+          ]
+        },
+        "north": {
+          "texture": "#all",
+          "uv": [
+            9,
+            8,
+            16,
+            13
+          ]
+        },
+        "south": {
+          "texture": "#all",
+          "uv": [
+            1,
+            8,
+            8,
+            13
+          ]
+        },
+        "up": {
+          "texture": "#all",
+          "uv": [
+            1,
+            7,
+            8,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#all",
+          "uv": [
+            0,
+            8,
+            1,
+            13
+          ]
+        }
+      },
+      "from": [
+        1,
+        0,
+        7
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          1,
+          0,
+          7
+        ]
+      },
+      "to": [
+        15,
+        10,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#all",
+          "uv": [
+            8,
+            4.5,
+            0,
+            6.5
+          ]
+        },
+        "east": {
+          "cullface": "east",
+          "texture": "#all",
+          "uv": [
+            8,
+            2,
+            10,
+            3
+          ]
+        },
+        "north": {
+          "texture": "#all",
+          "uv": [
+            0,
+            3.5,
+            8,
+            4.5
+          ]
+        },
+        "south": {
+          "texture": "#all",
+          "uv": [
+            0,
+            2,
+            8,
+            3
+          ]
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#all",
+          "uv": [
+            0,
+            0,
+            8,
+            2
+          ]
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#all",
+          "uv": [
+            8,
+            3.5,
+            10,
+            4.5
+          ]
+        }
+      },
+      "from": [
+        0,
+        14,
+        6
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          0,
+          14,
+          7
+        ]
+      },
+      "to": [
+        16,
+        16,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            12.5,
+            5.5,
+            11,
+            6.5
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            11,
+            5.5,
+            12.5,
+            6.5
+          ]
+        }
+      },
+      "from": [
+        1.5,
+        10,
+        8
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          3,
+          11,
+          8
+        ]
+      },
+      "to": [
+        4.5,
+        12,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            15.5,
+            4.5,
+            14,
+            6
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            14,
+            4.5,
+            15.5,
+            6
+          ]
+        }
+      },
+      "from": [
+        1.5,
+        11,
+        8
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          3,
+          12,
+          8
+        ]
+      },
+      "to": [
+        4.5,
+        14,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            12.5,
+            5.5,
+            11,
+            6.5
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            11,
+            5.5,
+            12.5,
+            6.5
+          ]
+        }
+      },
+      "from": [
+        11.5,
+        10,
+        8
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          13,
+          11,
+          8
+        ]
+      },
+      "to": [
+        14.5,
+        12,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            15.5,
+            4.5,
+            14,
+            6
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            14,
+            4.5,
+            15.5,
+            6
+          ]
+        }
+      },
+      "from": [
+        11.5,
+        11,
+        8
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          13,
+          12,
+          8
+        ]
+      },
+      "to": [
+        14.5,
+        14,
+        8
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "baobabtree:block/baobab_hanging_sign",
-    "particle": "minecraft:block/air"
+    "chain": "minecraft:block/oak_hanging_sign",
+    "particle": "baobabtree:block/stripped_baobab_log"
   }
 }

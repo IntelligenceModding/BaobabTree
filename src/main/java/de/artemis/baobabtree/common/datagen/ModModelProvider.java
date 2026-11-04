@@ -2,12 +2,15 @@ package de.artemis.baobabtree.common.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import de.artemis.baobabtree.BaobabTree;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TexturedModel;
@@ -22,9 +25,13 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.VanillaPackResources;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -73,7 +80,6 @@ public final class ModModelProvider extends ModelProvider {
                 .door(ModBlocks.BAOBAB_DOOR.get())
                 .fence(ModBlocks.BAOBAB_FENCE.get())
                 .fenceGate(ModBlocks.BAOBAB_FENCE_GATE.get())
-                .hangingSign(ModBlocks.BAOBAB_HANGING_SIGN.get(), ModBlocks.BAOBAB_WALL_HANGING_SIGN.get())
                 .pressurePlate(ModBlocks.BAOBAB_PRESSURE_PLATE.get())
                 .sign(ModBlocks.BAOBAB_SIGN.get(), ModBlocks.BAOBAB_WALL_SIGN.get())
                 .slab(ModBlocks.BAOBAB_SLAB.get())
@@ -81,6 +87,7 @@ public final class ModModelProvider extends ModelProvider {
                 .trapdoor(ModBlocks.BAOBAB_TRAPDOOR.get())
                 .getFamily());
         blockModels.createShelf(ModBlocks.BAOBAB_SHELF.get(), ModBlocks.STRIPPED_BAOBAB_LOG.get());
+        createHangingSigns(blockModels);
 
         blockModels.createTrivialBlock(ModBlocks.BAOBAB_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(ModBlocks.BAOBAB_SAPLING.get(), ModBlocks.POTTED_BAOBAB_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
@@ -103,6 +110,54 @@ public final class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BAOBAB_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BAOBAB_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BAOBAB_FRUIT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BAOBAB_HANGING_SIGN.get(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private void createHangingSigns(BlockModelGenerators models) {
+        MultiVariant[] hanging = new MultiVariant[4];
+        MultiVariant[] attached = new MultiVariant[4];
+        for (int rotation = 0; rotation < 4; rotation++) {
+            hanging[rotation] = hangingSignModel(models, "baobab_hanging_sign_rot_" + rotation,
+                    "template_hanging_sign_rot_" + rotation, 1);
+            attached[rotation] = hangingSignModel(models, "baobab_hanging_sign_attached_rot_" + rotation,
+                    "template_attached_hanging_sign_rot_" + rotation, 1);
+        }
+        models.blockStateOutput.accept(BlockModelGenerators.createHangingSign(ModBlocks.BAOBAB_HANGING_SIGN.get(),
+                hanging[0], hanging[1], hanging[2], hanging[3], attached[0], attached[1], attached[2], attached[3]));
+        MultiVariant wall = hangingSignModel(models, "baobab_wall_hanging_sign", "template_wall_hanging_sign", 2);
+        models.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.BAOBAB_WALL_HANGING_SIGN.get(), wall)
+                .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT));
+    }
+
+    private MultiVariant hangingSignModel(BlockModelGenerators models, String name, String template, int firstChain) {
+        String resource = "/assets/minecraft/models/block/" + template + ".json";
+        JsonObject model;
+        // Keep every vanilla rotation and attachment geometry, but give the chain faces
+        // their own complete 26.3 atlas instead of the legacy baobab atlas conversion.
+        // Vanilla assets belong to Minecraft's module, not the mod's module.
+        try (var stream = VanillaPackResources.class.getResourceAsStream(resource)) {
+            if (stream == null) {
+                throw new IllegalStateException("Missing vanilla sign template: " + resource);
+            }
+            model = JsonParser.parseReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).getAsJsonObject();
+        } catch (IOException exception) {
+            throw new IllegalStateException("Could not read sign template: " + resource, exception);
+        }
+        model.addProperty("render_type", "minecraft:cutout");
+        JsonObject textures = new JsonObject();
+        textures.addProperty("all", BaobabTree.MOD_ID + ":block/baobab_hanging_sign");
+        textures.addProperty("chain", "minecraft:block/oak_hanging_sign");
+        textures.addProperty("particle", BaobabTree.MOD_ID + ":block/stripped_baobab_log");
+        model.add("textures", textures);
+        JsonArray elements = model.getAsJsonArray("elements");
+        for (int index = firstChain; index < elements.size(); index++) {
+            for (var face : elements.get(index).getAsJsonObject().getAsJsonObject("faces").entrySet()) {
+                face.getValue().getAsJsonObject().addProperty("texture", "#chain");
+            }
+        }
+        Identifier location = modModel(name);
+        models.modelOutput.accept(location, () -> model);
+        return BlockModelGenerators.plainVariant(location);
     }
 
     @Override

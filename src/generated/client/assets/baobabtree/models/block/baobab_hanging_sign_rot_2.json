@@ -1,7 +1,236 @@
 {
-  "parent": "minecraft:block/template_hanging_sign_rot_2",
+  "parent": "block/block",
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#all",
+          "uv": [
+            1,
+            13,
+            8,
+            14
+          ]
+        },
+        "east": {
+          "texture": "#all",
+          "uv": [
+            8,
+            8,
+            9,
+            13
+          ]
+        },
+        "north": {
+          "texture": "#all",
+          "uv": [
+            9,
+            8,
+            16,
+            13
+          ]
+        },
+        "south": {
+          "texture": "#all",
+          "uv": [
+            1,
+            8,
+            8,
+            13
+          ]
+        },
+        "up": {
+          "texture": "#all",
+          "uv": [
+            1,
+            7,
+            8,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#all",
+          "uv": [
+            0,
+            8,
+            1,
+            13
+          ]
+        }
+      },
+      "from": [
+        1,
+        0,
+        7
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "to": [
+        15,
+        10,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            12.5,
+            3.5,
+            11,
+            6.5
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            11,
+            3.5,
+            12.5,
+            6.5
+          ]
+        }
+      },
+      "from": [
+        2.96447,
+        10,
+        4.46447
+      ],
+      "to": [
+        5.96447,
+        16,
+        4.46447
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            15.5,
+            4,
+            14,
+            6
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            14,
+            4,
+            15.5,
+            6
+          ]
+        }
+      },
+      "from": [
+        2.96447,
+        11,
+        11.53553
+      ],
+      "rotation": {
+        "angle": -90,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "to": [
+        5.96447,
+        15,
+        11.53553
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            12.5,
+            3.5,
+            11,
+            6.5
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            11,
+            3.5,
+            12.5,
+            6.5
+          ]
+        }
+      },
+      "from": [
+        10.03553,
+        10,
+        11.53553
+      ],
+      "to": [
+        13.03553,
+        16,
+        11.53553
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#chain",
+          "uv": [
+            15.5,
+            4,
+            14,
+            6
+          ]
+        },
+        "south": {
+          "texture": "#chain",
+          "uv": [
+            14,
+            4,
+            15.5,
+            6
+          ]
+        }
+      },
+      "from": [
+        10.03553,
+        11,
+        4.46447
+      ],
+      "rotation": {
+        "angle": -90,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "to": [
+        13.03553,
+        15,
+        4.46447
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "baobabtree:block/baobab_hanging_sign",
-    "particle": "minecraft:block/air"
+    "chain": "minecraft:block/oak_hanging_sign",
+    "particle": "baobabtree:block/stripped_baobab_log"
   }
 }
