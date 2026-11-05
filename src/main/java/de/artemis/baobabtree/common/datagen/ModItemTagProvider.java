@@ -9,8 +9,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -83,13 +83,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.FENCE_GATES_WOODEN)
                 .add(ModBlocks.BAOBAB_FENCE_GATE.get().asItem());
 
-        tag(Tags.Items.STRIPPED_LOGS)
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_logs")))
                 .add(ModBlocks.STRIPPED_BAOBAB_LOG.get().asItem());
 
-        tag(Tags.Items.STRIPPED_WOODS)
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_woods")))
                 .add(ModBlocks.STRIPPED_BAOBAB_WOOD.get().asItem());
 
-        tag(Tags.Items.FOODS_FRUIT)
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "foods/fruit")))
                 .add(ModItems.BAOBAB_FRUIT.get());
     }
 }

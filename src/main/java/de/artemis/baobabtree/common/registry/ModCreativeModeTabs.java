@@ -5,8 +5,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
@@ -21,31 +21,31 @@ public final class ModCreativeModeTabs {
                     .icon(() -> new ItemStack(ModBlocks.BAOBAB_SAPLING.get()))
                     .title(Component.translatable("itemGroup.baobabtree"))
                     .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.BAOBAB_LOG);
-                        output.accept(ModBlocks.BAOBAB_WOOD);
-                        output.accept(ModBlocks.STRIPPED_BAOBAB_LOG);
-                        output.accept(ModBlocks.STRIPPED_BAOBAB_WOOD);
-                        output.accept(ModBlocks.BAOBAB_PLANKS);
-                        output.accept(ModBlocks.BAOBAB_STAIRS);
-                        output.accept(ModBlocks.BAOBAB_SLAB);
-                        output.accept(ModBlocks.BAOBAB_FENCE);
-                        output.accept(ModBlocks.BAOBAB_FENCE_GATE);
-                        output.accept(ModBlocks.BAOBAB_DOOR);
-                        output.accept(ModBlocks.BAOBAB_TRAPDOOR);
-                        output.accept(ModBlocks.BAOBAB_BUTTON);
-                        output.accept(ModBlocks.BAOBAB_PRESSURE_PLATE);
-                        output.accept(ModItems.BAOBAB_SIGN);
-                        output.accept(ModItems.BAOBAB_HANGING_SIGN);
-                        output.accept(ModBlocks.BAOBAB_LEAVES);
-                        output.accept(ModBlocks.BAOBAB_SAPLING);
-                        output.accept(ModBlocks.BAOBAB_LITTER);
-                        output.accept(ModBlocks.TREE_ROOT);
-                        output.accept(ModBlocks.SMALL_BAOBAB_FRUIT_POD);
-                        output.accept(ModBlocks.MEDIUM_BAOBAB_FRUIT_POD);
-                        output.accept(ModBlocks.LARGE_BAOBAB_FRUIT_POD);
-                        output.accept(ModItems.BAOBAB_FRUIT);
-                        output.accept(ModItems.BAOBAB_BOAT);
-                        output.accept(ModItems.BAOBAB_CHEST_BOAT);
+                        output.accept(ModBlocks.BAOBAB_LOG.get());
+                        output.accept(ModBlocks.BAOBAB_WOOD.get());
+                        output.accept(ModBlocks.STRIPPED_BAOBAB_LOG.get());
+                        output.accept(ModBlocks.STRIPPED_BAOBAB_WOOD.get());
+                        output.accept(ModBlocks.BAOBAB_PLANKS.get());
+                        output.accept(ModBlocks.BAOBAB_STAIRS.get());
+                        output.accept(ModBlocks.BAOBAB_SLAB.get());
+                        output.accept(ModBlocks.BAOBAB_FENCE.get());
+                        output.accept(ModBlocks.BAOBAB_FENCE_GATE.get());
+                        output.accept(ModBlocks.BAOBAB_DOOR.get());
+                        output.accept(ModBlocks.BAOBAB_TRAPDOOR.get());
+                        output.accept(ModBlocks.BAOBAB_BUTTON.get());
+                        output.accept(ModBlocks.BAOBAB_PRESSURE_PLATE.get());
+                        output.accept(ModItems.BAOBAB_SIGN.get());
+                        output.accept(ModItems.BAOBAB_HANGING_SIGN.get());
+                        output.accept(ModBlocks.BAOBAB_LEAVES.get());
+                        output.accept(ModBlocks.BAOBAB_SAPLING.get());
+                        output.accept(ModBlocks.BAOBAB_LITTER.get());
+                        output.accept(ModBlocks.TREE_ROOT.get());
+                        output.accept(ModBlocks.SMALL_BAOBAB_FRUIT_POD.get());
+                        output.accept(ModBlocks.MEDIUM_BAOBAB_FRUIT_POD.get());
+                        output.accept(ModBlocks.LARGE_BAOBAB_FRUIT_POD.get());
+                        output.accept(ModItems.BAOBAB_FRUIT.get());
+                        output.accept(ModItems.BAOBAB_BOAT.get());
+                        output.accept(ModItems.BAOBAB_CHEST_BOAT.get());
                     })
                     .build()
     );

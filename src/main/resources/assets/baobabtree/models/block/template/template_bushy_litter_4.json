@@ -4,8 +4,8 @@
   "ambientocclusion": false,
   "render_type": "cutout",
   "textures": {
-    "particle": "block/leaf_litter",
-    "texture": "block/leaf_litter"
+    "particle": "baobabtree:block/baobab_litter",
+    "texture": "baobabtree:block/baobab_litter"
   },
   "elements": [
     {

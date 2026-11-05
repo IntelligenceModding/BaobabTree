@@ -5,7 +5,7 @@ import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
 
-public class ModLanguageProvider extends net.neoforged.neoforge.common.data.LanguageProvider {
+public class ModLanguageProvider extends net.minecraftforge.common.data.LanguageProvider {
     public ModLanguageProvider(PackOutput output, String locale) {
         super(output, BaobabTree.MOD_ID, locale);
     }

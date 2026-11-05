@@ -6,13 +6,13 @@ import de.artemis.baobabtree.common.worldgen.feature.BaobabTreeGenerator;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
 public final class ModFeatures {
-    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, BaobabTree.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(net.minecraft.core.registries.Registries.FEATURE, BaobabTree.MOD_ID);
 
     public static final Supplier<Feature<NoneFeatureConfiguration>> YOUNG_BAOBAB_FEATURE =
             FEATURES.register("young_baobab_feature", () -> new BaobabTreeFeature(NoneFeatureConfiguration.CODEC, BaobabTreeGenerator.Variant.YOUNG));

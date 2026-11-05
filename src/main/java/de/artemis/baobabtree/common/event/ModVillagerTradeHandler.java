@@ -5,9 +5,9 @@ import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.BasicItemListing;
-import net.neoforged.neoforge.event.village.VillagerTradesEvent;
-import net.neoforged.neoforge.event.village.WandererTradesEvent;
+
+import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 
 public final class ModVillagerTradeHandler {
     private static final float PRICE_MULTIPLIER = 0.05F;
@@ -30,6 +30,15 @@ public final class ModVillagerTradeHandler {
                     10,
                     PRICE_MULTIPLIER
             ));
+        }
+    }
+    private record BasicItemListing(ItemStack cost, ItemStack result, int uses, int xp, float multiplier) implements net.minecraft.world.entity.npc.VillagerTrades.ItemListing {
+        BasicItemListing(int emeralds, ItemStack result, int uses, int xp, float multiplier) {
+            this(new ItemStack(Items.EMERALD, emeralds), result, uses, xp, multiplier);
+        }
+        @Override
+        public net.minecraft.world.item.trading.MerchantOffer getOffer(net.minecraft.world.entity.Entity trader, net.minecraft.util.RandomSource random) {
+            return new net.minecraft.world.item.trading.MerchantOffer(new net.minecraft.world.item.trading.ItemCost(cost.getItem(), cost.getCount()), result.copy(), uses, xp, multiplier);
         }
     }
 }

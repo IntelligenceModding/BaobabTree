@@ -6,9 +6,9 @@ import de.artemis.baobabtree.common.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -85,10 +85,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(Tags.Blocks.FENCE_GATES_WOODEN)
                 .add(ModBlocks.BAOBAB_FENCE_GATE.get());
 
-        tag(Tags.Blocks.STRIPPED_LOGS)
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_logs")))
                 .add(ModBlocks.STRIPPED_BAOBAB_LOG.get());
 
-        tag(Tags.Blocks.STRIPPED_WOODS)
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_woods")))
                 .add(ModBlocks.STRIPPED_BAOBAB_WOOD.get());
 
         tag(BlockTags.PLANKS)

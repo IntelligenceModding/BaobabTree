@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.ItemAbilities;
+import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,7 +91,7 @@ public class BaobabLitterBlock extends PinkPetalsBlock implements EntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        if (stack.canPerformAction(ItemAbilities.PICKAXE_DIG)) {
+        if (stack.canPerformAction(ToolActions.PICKAXE_DIG)) {
             if (!level.isClientSide()) {
                 harvestOneLayer(level, pos, state);
                 level.playSound(null, pos, SoundEvents.GRASS_BREAK, SoundSource.BLOCKS, 0.75F, 0.95F + level.random.nextFloat() * 0.1F);
