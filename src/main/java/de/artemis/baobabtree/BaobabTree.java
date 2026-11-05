@@ -21,8 +21,8 @@ import net.minecraftforge.common.MinecraftForge;
 public class BaobabTree {
     public static final String MOD_ID = "baobabtree";
 
-    public BaobabTree(FMLJavaModLoadingContext context) {
-        IEventBus modEventBus = context.getModEventBus();
+    public BaobabTree() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(ModItemBehavior::setup);
         MinecraftForge.EVENT_BUS.addListener(ModItemBehavior::fuel);
         ModItems.register(modEventBus);

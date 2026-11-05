@@ -22,7 +22,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
+    public void addTags(HolderLookup.@NotNull Provider provider) {
         tag(ItemTags.SAPLINGS)
                 .add(ModBlocks.BAOBAB_SAPLING.get().asItem());
 
@@ -83,13 +83,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.FENCE_GATES_WOODEN)
                 .add(ModBlocks.BAOBAB_FENCE_GATE.get().asItem());
 
-        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_logs")))
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, new net.minecraft.resources.ResourceLocation("c", "stripped_logs")))
                 .add(ModBlocks.STRIPPED_BAOBAB_LOG.get().asItem());
 
-        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_woods")))
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, new net.minecraft.resources.ResourceLocation("c", "stripped_woods")))
                 .add(ModBlocks.STRIPPED_BAOBAB_WOOD.get().asItem());
 
-        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "foods/fruit")))
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, new net.minecraft.resources.ResourceLocation("c", "foods/fruit")))
                 .add(ModItems.BAOBAB_FRUIT.get());
     }
 }

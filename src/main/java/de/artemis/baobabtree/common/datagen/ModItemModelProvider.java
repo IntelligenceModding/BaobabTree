@@ -4,7 +4,6 @@ import de.artemis.baobabtree.BaobabTree;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -15,7 +14,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    protected void registerModels() {
+    public void registerModels() {
         modTextureItem(ModItems.BAOBAB_SIGN.get(), "baobab_sign");
         modTextureItem(ModItems.BAOBAB_HANGING_SIGN.get(), "baobab_hanging_sign");
         modTextureItem(ModItems.BAOBAB_BOAT.get(), "baobab_boat");
@@ -26,30 +25,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         modTextureBlockItem(ModBlocks.BAOBAB_LITTER.get().asItem(), "baobab_litter");
     }
 
-    private void vanillaTextureItem(Item item, String textureName) {
-        String name = item.builtInRegistryHolder().key().location().getPath();
-        withExistingParent(name, mcLoc("item/generated"))
-                .texture("layer0", mcLoc("item/" + textureName));
-    }
-
-    private void vanillaTextureBlockItem(Item item, String textureName) {
-        vanillaTextureBlockItemWithParent(item, textureName, mcLoc("item/generated"));
-    }
-
-    private void vanillaTextureBlockItemWithParent(Item item, String textureName, ResourceLocation parent) {
-        String name = item.builtInRegistryHolder().key().location().getPath();
-        withExistingParent(name, parent)
-                .texture("layer0", mcLoc("block/" + textureName));
-    }
 
     private void modTextureItem(Item item, String textureName) {
-        String name = item.builtInRegistryHolder().key().location().getPath();
+        String name = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item).getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/" + textureName));
     }
 
     private void modTextureBlockItem(Item item, String textureName) {
-        String name = item.builtInRegistryHolder().key().location().getPath();
+        String name = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item).getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", modLoc("block/" + textureName));
     }

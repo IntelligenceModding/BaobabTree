@@ -32,13 +32,16 @@ public final class ModVillagerTradeHandler {
             ));
         }
     }
-    private record BasicItemListing(ItemStack cost, ItemStack result, int uses, int xp, float multiplier) implements net.minecraft.world.entity.npc.VillagerTrades.ItemListing {
+
+    private record BasicItemListing(ItemStack cost, ItemStack result, int uses, int xp,
+                                    float multiplier) implements net.minecraft.world.entity.npc.VillagerTrades.ItemListing {
         BasicItemListing(int emeralds, ItemStack result, int uses, int xp, float multiplier) {
             this(new ItemStack(Items.EMERALD, emeralds), result, uses, xp, multiplier);
         }
+
         @Override
         public net.minecraft.world.item.trading.MerchantOffer getOffer(net.minecraft.world.entity.Entity trader, net.minecraft.util.RandomSource random) {
-            return new net.minecraft.world.item.trading.MerchantOffer(new net.minecraft.world.item.trading.ItemCost(cost.getItem(), cost.getCount()), result.copy(), uses, xp, multiplier);
+            return new net.minecraft.world.item.trading.MerchantOffer(cost.copy(), result.copy(), uses, xp, multiplier);
         }
     }
 }

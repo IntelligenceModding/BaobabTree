@@ -36,7 +36,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     @Override
-    protected void registerStatesAndModels() {
+    public void registerStatesAndModels() {
         logBlock(ModBlocks.BAOBAB_LOG.get(), modLoc("block/baobab_log"), modLoc("block/baobab_log_top"));
         woodBlock(ModBlocks.BAOBAB_WOOD.get(), modLoc("block/baobab_log"));
         logBlock(ModBlocks.STRIPPED_BAOBAB_LOG.get(), modLoc("block/stripped_baobab_log"), modLoc("block/stripped_baobab_log_top"));
@@ -165,20 +165,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(block, model);
     }
 
-    private void crossBlock(Block block, ResourceLocation texture) {
-        String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        ModelFile model = models().cross(name, texture).renderType("cutout");
-        simpleBlock(block, model);
-        simpleBlockItem(block, model);
-    }
-
-    private void cutoutLogBlock(Block block, ResourceLocation side, ResourceLocation end) {
-        String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        ModelFile vertical = models().cubeColumn(name, side, end).renderType("cutout");
-        ModelFile horizontal = models().cubeColumnHorizontal(name + "_horizontal", side, end).renderType("cutout");
-        axisBlock((RotatedPillarBlock) block, vertical, horizontal);
-        simpleBlockItem(block, vertical);
-    }
 
     private void litterBlock() {
         String name = BuiltInRegistries.BLOCK.getKey(ModBlocks.BAOBAB_LITTER.get()).getPath();
@@ -311,6 +297,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
         simpleBlockItem(block, model);
     }
+
     private void hangingSignBlock(CeilingHangingSignBlock ceiling, WallHangingSignBlock wall, ResourceLocation texture) {
         ModelFile model = models().getBuilder(BuiltInRegistries.BLOCK.getKey(ceiling).getPath()).texture("particle", texture);
         simpleBlock(ceiling, model);

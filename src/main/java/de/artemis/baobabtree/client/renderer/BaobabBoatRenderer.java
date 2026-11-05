@@ -44,7 +44,7 @@ public class BaobabBoatRenderer<T extends Boat> extends EntityRenderer<T> {
     }
 
     private static ResourceLocation getTextureLocation(boolean chestBoat) {
-        return ResourceLocation.fromNamespaceAndPath(
+        return new ResourceLocation(
                 BaobabTree.MOD_ID,
                 chestBoat ? "textures/entity/chest_boat/baobab.png" : "textures/entity/boat/baobab.png"
         );
@@ -71,7 +71,7 @@ public class BaobabBoatRenderer<T extends Boat> extends EntityRenderer<T> {
             poseStack.mulPose(new Quaternionf().setAngleAxis(entity.getBubbleAngle(partialTicks) * ((float) Math.PI / 180F), 1.0F, 0.0F, 1.0F));
         }
 
-        Pair<ResourceLocation, ListModel<Boat>> pair = getModelWithLocation(entity);
+        Pair<ResourceLocation, ListModel<Boat>> pair = getModelWithLocation();
         ResourceLocation texture = pair.getFirst();
         ListModel<Boat> model = pair.getSecond();
 
@@ -81,12 +81,12 @@ public class BaobabBoatRenderer<T extends Boat> extends EntityRenderer<T> {
         model.setupAnim(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F);
 
         VertexConsumer vertexConsumer = buffer.getBuffer(model.renderType(texture));
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 
         if (!entity.isUnderWater()) {
             VertexConsumer waterMaskConsumer = buffer.getBuffer(RenderType.waterMask());
             if (model instanceof WaterPatchModel waterPatchModel) {
-                waterPatchModel.waterPatch().render(poseStack, waterMaskConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+                waterPatchModel.waterPatch().render(poseStack, waterMaskConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             }
         }
 
@@ -96,10 +96,10 @@ public class BaobabBoatRenderer<T extends Boat> extends EntityRenderer<T> {
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull T entity) {
-        return getModelWithLocation(entity).getFirst();
+        return getModelWithLocation().getFirst();
     }
 
-    public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(T boat) {
+    private Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation() {
         return boatResource;
     }
 }

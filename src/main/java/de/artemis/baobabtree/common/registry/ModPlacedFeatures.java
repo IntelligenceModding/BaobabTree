@@ -3,7 +3,7 @@ package de.artemis.baobabtree.common.registry;
 import de.artemis.baobabtree.BaobabTree;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -29,7 +29,7 @@ public final class ModPlacedFeatures {
     private ModPlacedFeatures() {
     }
 
-    public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+    public static void bootstrap(BootstapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, YOUNG_BAOBAB_PLACED_KEY, configuredFeatures.getOrThrow(ModTreeConfiguredFeatures.YOUNG_BAOBAB_KEY),
@@ -98,10 +98,10 @@ public final class ModPlacedFeatures {
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(BaobabTree.MOD_ID, name));
     }
 
-    private static void register(BootstrapContext<PlacedFeature> context,
+    private static void register(BootstapContext<PlacedFeature> context,
                                  ResourceKey<PlacedFeature> key,
                                  Holder<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>> configuration,
                                  List<PlacementModifier> modifiers) {

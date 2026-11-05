@@ -3,7 +3,7 @@ package de.artemis.baobabtree.common.registry;
 import de.artemis.baobabtree.BaobabTree;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -26,7 +26,7 @@ public final class ModBiomeModifiers {
     private ModBiomeModifiers() {
     }
 
-    public static void bootstrap(BootstrapContext<BiomeModifier> context) {
+    public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
 
@@ -82,6 +82,6 @@ public final class ModBiomeModifiers {
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, name));
+        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(BaobabTree.MOD_ID, name));
     }
 }

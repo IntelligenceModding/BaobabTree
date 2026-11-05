@@ -6,9 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -18,7 +17,7 @@ public class BaobabSaplingBlock extends SaplingBlock {
         this(ModTreeGrowers.BAOBAB, properties);
     }
 
-    public BaobabSaplingBlock(TreeGrower treeGrower, BlockBehaviour.Properties properties) {
+    public BaobabSaplingBlock(AbstractTreeGrower treeGrower, BlockBehaviour.Properties properties) {
         super(treeGrower, properties);
     }
 

@@ -21,7 +21,7 @@ public final class ModTags {
         }
 
         private static TagKey<Block> createTag(String name) {
-            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, name));
+            return BlockTags.create(new ResourceLocation(BaobabTree.MOD_ID, name));
         }
     }
 
@@ -32,7 +32,7 @@ public final class ModTags {
         }
 
         private static TagKey<Item> createTag(String name) {
-            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, name));
+            return ItemTags.create(new ResourceLocation(BaobabTree.MOD_ID, name));
         }
     }
 
@@ -43,7 +43,7 @@ public final class ModTags {
         }
 
         private static TagKey<Biome> createTag(String name) {
-            return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, name));
+            return TagKey.create(Registries.BIOME, new ResourceLocation(BaobabTree.MOD_ID, name));
         }
     }
 }

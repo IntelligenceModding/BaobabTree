@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
 public class BaobabTreeJeiPlugin implements IModPlugin {
-    private static final ResourceLocation PLUGIN_UID = ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, "jei_plugin");
+    private static final ResourceLocation PLUGIN_UID = new ResourceLocation(BaobabTree.MOD_ID, "jei_plugin");
 
     @Override
     public ResourceLocation getPluginUid() {

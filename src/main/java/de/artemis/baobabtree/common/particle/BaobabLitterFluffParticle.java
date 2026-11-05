@@ -17,14 +17,14 @@ public class BaobabLitterFluffParticle extends TextureSheetParticle {
     private final float driftStrength;
     private final float swirlPhase;
 
-    protected BaobabLitterFluffParticle(ClientLevel level,
-                                        double x,
-                                        double y,
-                                        double z,
-                                        SpriteSet spriteSet,
-                                        double xSpeed,
-                                        double ySpeed,
-                                        double zSpeed) {
+    public BaobabLitterFluffParticle(ClientLevel level,
+                                     double x,
+                                     double y,
+                                     double z,
+                                     SpriteSet spriteSet,
+                                     double xSpeed,
+                                     double ySpeed,
+                                     double zSpeed) {
         super(level, x, y, z, xSpeed, ySpeed, zSpeed);
 
         double angle = random.nextDouble() * Math.PI * 2.0D;

@@ -100,14 +100,14 @@ public final class TreeRootClimbHandler {
         );
         if (level.random.nextFloat() < 0.55F) {
             level.playLocalSound(
-                player.getX(),
-                player.getY() + 0.5D,
-                player.getZ(),
-                Blocks.ROOTED_DIRT.defaultBlockState().getSoundType().getStepSound(),
-                SoundSource.PLAYERS,
-                0.16F,
-                0.9F + level.random.nextFloat() * 0.18F,
-                false
+                    player.getX(),
+                    player.getY() + 0.5D,
+                    player.getZ(),
+                    Blocks.ROOTED_DIRT.defaultBlockState().getSoundType().getStepSound(),
+                    SoundSource.PLAYERS,
+                    0.16F,
+                    0.9F + level.random.nextFloat() * 0.18F,
+                    false
             );
         }
     }

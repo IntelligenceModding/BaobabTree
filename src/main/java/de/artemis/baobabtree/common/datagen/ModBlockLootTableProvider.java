@@ -4,7 +4,6 @@ import de.artemis.baobabtree.common.block.BaobabFruitPodBlock;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
@@ -19,12 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
-    protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+    public ModBlockLootTableProvider() {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
     @Override
-    protected void generate() {
+    public void generate() {
         dropSelf(ModBlocks.BAOBAB_LOG.get());
         dropSelf(ModBlocks.BAOBAB_WOOD.get());
         dropSelf(ModBlocks.STRIPPED_BAOBAB_LOG.get());
@@ -86,7 +85,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     @Override
-    protected @NotNull Iterable<Block> getKnownBlocks() {
+    public @NotNull Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(block -> (Block) block.get()).toList();
     }
 }

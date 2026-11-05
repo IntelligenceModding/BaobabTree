@@ -1,14 +1,12 @@
 package de.artemis.baobabtree.common.block;
 
-import com.mojang.serialization.MapCodec;
 import de.artemis.baobabtree.common.registry.ModItems;
 import de.artemis.baobabtree.common.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -42,22 +40,12 @@ public class BaobabHangingPodBlock extends Block implements Fallable {
     };
 
     private final int sizeIndex;
-    private final MapCodec<BaobabHangingPodBlock> codec;
 
-    public BaobabHangingPodBlock(BlockBehaviour.Properties properties) {
-        this(properties, 0);
-    }
 
     public BaobabHangingPodBlock(BlockBehaviour.Properties properties, int sizeIndex) {
         super(properties);
         this.sizeIndex = sizeIndex;
-        this.codec = simpleCodec(p -> new BaobabHangingPodBlock(p, sizeIndex));
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends Block> codec() {
-        return codec;
     }
 
     @Override
@@ -66,18 +54,18 @@ public class BaobabHangingPodBlock extends Block implements Fallable {
     }
 
     @Override
-    protected boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+    public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
         BlockPos belowPos = pos.below();
         return level.getBlockState(belowPos).isFaceSturdy(level, belowPos, Direction.UP);
     }
 
     @Override
-    protected @NotNull BlockState updateShape(@NotNull BlockState state,
-                                              @NotNull Direction direction,
-                                              @NotNull BlockState neighborState,
-                                              @NotNull LevelAccessor level,
-                                              @NotNull BlockPos pos,
-                                              @NotNull BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(@NotNull BlockState state,
+                                           @NotNull Direction direction,
+                                           @NotNull BlockState neighborState,
+                                           @NotNull LevelAccessor level,
+                                           @NotNull BlockPos pos,
+                                           @NotNull BlockPos neighborPos) {
         return direction == Direction.DOWN && !state.canSurvive(level, pos)
                 ? net.minecraft.world.level.block.Blocks.AIR.defaultBlockState()
                 : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
@@ -90,36 +78,36 @@ public class BaobabHangingPodBlock extends Block implements Fallable {
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(@NotNull BlockState state,
-                                           @NotNull BlockGetter level,
-                                           @NotNull BlockPos pos,
-                                           @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState state,
+                                        @NotNull BlockGetter level,
+                                        @NotNull BlockPos pos,
+                                        @NotNull CollisionContext context) {
         return GROUND_SHAPES[sizeIndex];
     }
 
     @Override
-    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack,
-                                                       @NotNull BlockState state,
-                                                       @NotNull Level level,
-                                                       @NotNull BlockPos pos,
-                                                       @NotNull Player player,
-                                                       @NotNull InteractionHand hand,
-                                                       @NotNull BlockHitResult hitResult) {
+    public @NotNull InteractionResult use(@NotNull BlockState state,
+                                          @NotNull Level level,
+                                          @NotNull BlockPos pos,
+                                          @NotNull Player player,
+                                          @NotNull InteractionHand hand,
+                                          @NotNull BlockHitResult hitResult) {
+        ItemStack stack = player.getItemInHand(hand);
         if (!stack.canPerformAction(ToolActions.AXE_DIG) && !stack.canPerformAction(ToolActions.SWORD_DIG)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.PASS;
         }
 
         if (level.isClientSide()) {
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         harvestPod(level, pos, state, player, stack, hand, hitResult);
-        return ItemInteractionResult.CONSUME;
+        return InteractionResult.CONSUME;
     }
 
     @Override
@@ -160,6 +148,6 @@ public class BaobabHangingPodBlock extends Block implements Fallable {
 
         ModUtils.spawnItemAtClickedSide(level, pos, hitResult, new ItemStack(ModItems.BAOBAB_FRUIT.get(), (sizeIndex + 1) * 2));
         ModUtils.awardBlockMinedStat(player, this);
-        tool.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+        tool.hurtAndBreak(1, player, entity -> entity.broadcastBreakEvent(hand));
     }
 }

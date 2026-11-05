@@ -3,7 +3,6 @@ package de.artemis.baobabtree.common.registry;
 import de.artemis.baobabtree.BaobabTree;
 import de.artemis.baobabtree.common.worldgen.feature.BaobabTreeFeature;
 import de.artemis.baobabtree.common.worldgen.feature.BaobabTreeGenerator;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraftforge.eventbus.api.IEventBus;

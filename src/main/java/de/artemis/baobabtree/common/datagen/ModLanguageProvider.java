@@ -11,7 +11,7 @@ public class ModLanguageProvider extends net.minecraftforge.common.data.Language
     }
 
     @Override
-    protected void addTranslations() {
+    public void addTranslations() {
         add("itemGroup.baobabtree", "Baobab Tree");
         add(ModBlocks.BAOBAB_LOG.get(), "Baobab Log");
         add(ModBlocks.BAOBAB_WOOD.get(), "Baobab Wood");

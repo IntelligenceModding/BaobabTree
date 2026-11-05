@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.PinkPetalsBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
@@ -35,87 +34,86 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(net.minecraft.core.registries.Registries.BLOCK, BaobabTree.MOD_ID);
 
     public static final RegistryObject<Block> BAOBAB_LOG = registerBlock("baobab_log",
-            () -> new BaobabStrippableLogBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_LOG), () -> ModBlocks.STRIPPED_BAOBAB_LOG.get()));
+            () -> new BaobabStrippableLogBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG), () -> ModBlocks.STRIPPED_BAOBAB_LOG.get()));
 
     public static final RegistryObject<Block> BAOBAB_WOOD = registerBlock("baobab_wood",
-            () -> new BaobabStrippableLogBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_WOOD), () -> ModBlocks.STRIPPED_BAOBAB_WOOD.get()));
+            () -> new BaobabStrippableLogBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WOOD), () -> ModBlocks.STRIPPED_BAOBAB_WOOD.get()));
 
     public static final RegistryObject<Block> STRIPPED_BAOBAB_LOG = registerBlock("stripped_baobab_log",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_ACACIA_LOG)));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_LOG)));
 
     public static final RegistryObject<Block> STRIPPED_BAOBAB_WOOD = registerBlock("stripped_baobab_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_ACACIA_WOOD)));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_ACACIA_WOOD)));
 
     public static final RegistryObject<Block> BAOBAB_PLANKS = registerBlock("baobab_planks",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS)));
 
     public static final RegistryObject<Block> BAOBAB_STAIRS = registerBlock("baobab_stairs",
-            () -> new StairBlock(BAOBAB_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_STAIRS)));
+            () -> new StairBlock(BAOBAB_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.ACACIA_STAIRS)));
 
     public static final RegistryObject<Block> BAOBAB_SLAB = registerBlock("baobab_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_SLAB)));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SLAB)));
 
     public static final RegistryObject<Block> BAOBAB_FENCE = registerBlock("baobab_fence",
-            () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_FENCE)));
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE)));
 
     public static final RegistryObject<Block> BAOBAB_FENCE_GATE = registerBlock("baobab_fence_gate",
-            () -> new FenceGateBlock(ModWoodTypes.BAOBAB_WOOD_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_FENCE_GATE)));
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_FENCE_GATE), ModWoodTypes.BAOBAB_WOOD_TYPE));
 
     public static final RegistryObject<Block> BAOBAB_BUTTON = registerBlock("baobab_button",
-            () -> new ButtonBlock(ModWoodTypes.BAOBAB_SET_TYPE, 30, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_BUTTON).noCollission()));
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_BUTTON).noCollission(), ModWoodTypes.BAOBAB_SET_TYPE, 30, true));
 
     public static final RegistryObject<Block> BAOBAB_PRESSURE_PLATE = registerBlock("baobab_pressure_plate",
-            () -> new PressurePlateBlock(ModWoodTypes.BAOBAB_SET_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PRESSURE_PLATE)));
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.ACACIA_PRESSURE_PLATE), ModWoodTypes.BAOBAB_SET_TYPE));
 
     public static final RegistryObject<Block> BAOBAB_DOOR = registerBlock("baobab_door",
-            () -> new DoorBlock(ModWoodTypes.BAOBAB_SET_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_DOOR).noOcclusion()));
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_DOOR).noOcclusion(), ModWoodTypes.BAOBAB_SET_TYPE));
 
     public static final RegistryObject<Block> BAOBAB_TRAPDOOR = registerBlock("baobab_trapdoor",
-            () -> new TrapDoorBlock(ModWoodTypes.BAOBAB_SET_TYPE, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_TRAPDOOR).noOcclusion()));
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_TRAPDOOR).noOcclusion(), ModWoodTypes.BAOBAB_SET_TYPE));
 
     public static final RegistryObject<Block> BAOBAB_SIGN = BLOCKS.register("baobab_sign",
-            () -> new BaobabStandingSignBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.ACACIA_SIGN).noCollission().strength(1.0F)));
+            () -> new BaobabStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SIGN).noCollission().strength(1.0F)));
 
     public static final RegistryObject<Block> BAOBAB_WALL_SIGN = BLOCKS.register("baobab_wall_sign",
-            () -> new BaobabWallSignBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.ACACIA_WALL_SIGN).noCollission().strength(1.0F).lootFrom(BAOBAB_SIGN)));
+            () -> new BaobabWallSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WALL_SIGN).noCollission().strength(1.0F).lootFrom(BAOBAB_SIGN)));
 
     public static final RegistryObject<Block> BAOBAB_HANGING_SIGN = BLOCKS.register("baobab_hanging_sign",
-            () -> new BaobabCeilingHangingSignBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.ACACIA_HANGING_SIGN).noCollission().strength(1.0F)));
+            () -> new BaobabCeilingHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_HANGING_SIGN).noCollission().strength(1.0F)));
 
     public static final RegistryObject<Block> BAOBAB_WALL_HANGING_SIGN = BLOCKS.register("baobab_wall_hanging_sign",
-            () -> new BaobabWallHangingSignBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.ACACIA_WALL_HANGING_SIGN).noCollission().strength(1.0F).lootFrom(BAOBAB_HANGING_SIGN)));
+            () -> new BaobabWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_WALL_HANGING_SIGN).noCollission().strength(1.0F).lootFrom(BAOBAB_HANGING_SIGN)));
 
     public static final RegistryObject<Block> BAOBAB_LEAVES = registerBlock("baobab_leaves",
-            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_LEAVES).randomTicks()));
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_LEAVES).randomTicks()));
 
     public static final RegistryObject<Block> BAOBAB_SAPLING = registerBlock("baobab_sapling",
-            () -> new BaobabSaplingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_SAPLING)));
+            () -> new BaobabSaplingBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_SAPLING)));
 
     public static final RegistryObject<Block> POTTED_BAOBAB_SAPLING = BLOCKS.register("potted_baobab_sapling",
-            () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BAOBAB_SAPLING, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_ACACIA_SAPLING).noOcclusion()));
+            () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BAOBAB_SAPLING, BlockBehaviour.Properties.copy(Blocks.POTTED_ACACIA_SAPLING).noOcclusion()));
 
     public static final RegistryObject<Block> BAOBAB_LITTER = registerBlock("baobab_litter",
-            () -> new BaobabLitterBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS)));
+            () -> new BaobabLitterBlock(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
 
     public static final RegistryObject<Block> TREE_ROOT = registerBlock("tree_root",
-            () -> new TreeRootBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUDDY_MANGROVE_ROOTS).sound(SoundType.ROOTED_DIRT)));
+            () -> new TreeRootBlock(BlockBehaviour.Properties.copy(Blocks.MUDDY_MANGROVE_ROOTS).sound(SoundType.ROOTED_DIRT)));
 
     public static final RegistryObject<Block> BAOBAB_FRUIT_POD = registerBlock("baobab_fruit_pod",
-            () -> new BaobabFruitPodBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COCOA).randomTicks().sound(SoundType.CROP)));
+            () -> new BaobabFruitPodBlock(BlockBehaviour.Properties.copy(Blocks.COCOA).randomTicks().sound(SoundType.CROP)));
 
     public static final RegistryObject<Block> SMALL_BAOBAB_FRUIT_POD = registerBlock("small_baobab_fruit_pod",
-            () -> new BaobabHangingPodBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COCOA).sound(SoundType.CROP), 0));
+            () -> new BaobabHangingPodBlock(BlockBehaviour.Properties.copy(Blocks.COCOA).sound(SoundType.CROP), 0));
 
     public static final RegistryObject<Block> MEDIUM_BAOBAB_FRUIT_POD = registerBlock("medium_baobab_fruit_pod",
-            () -> new BaobabHangingPodBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COCOA).sound(SoundType.CROP), 1));
+            () -> new BaobabHangingPodBlock(BlockBehaviour.Properties.copy(Blocks.COCOA).sound(SoundType.CROP), 1));
 
     public static final RegistryObject<Block> LARGE_BAOBAB_FRUIT_POD = registerBlock("large_baobab_fruit_pod",
-            () -> new BaobabHangingPodBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COCOA).sound(SoundType.CROP), 2));
+            () -> new BaobabHangingPodBlock(BlockBehaviour.Properties.copy(Blocks.COCOA).sound(SoundType.CROP), 2));
 
     private ModBlocks() {
     }

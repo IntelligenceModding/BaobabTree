@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "baobabtree:hanging_roots_from_tree_root"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tree_root": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "baobabtree:tree_root"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tree_root",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "baobabtree:hanging_roots_from_tree_root"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -20,7 +20,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
+    public void addTags(HolderLookup.@NotNull Provider provider) {
         tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.BAOBAB_LOG.get())
                 .add(ModBlocks.BAOBAB_WOOD.get())
@@ -85,10 +85,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(Tags.Blocks.FENCE_GATES_WOODEN)
                 .add(ModBlocks.BAOBAB_FENCE_GATE.get());
 
-        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_logs")))
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, new net.minecraft.resources.ResourceLocation("c", "stripped_logs")))
                 .add(ModBlocks.STRIPPED_BAOBAB_LOG.get());
 
-        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "stripped_woods")))
+        tag(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, new net.minecraft.resources.ResourceLocation("c", "stripped_woods")))
                 .add(ModBlocks.STRIPPED_BAOBAB_WOOD.get());
 
         tag(BlockTags.PLANKS)

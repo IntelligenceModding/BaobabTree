@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "baobabtree:baobab_leaves"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "baobabtree:baobab_litter"
+  }
+}

@@ -3,7 +3,6 @@ package de.artemis.baobabtree.common.registry;
 import de.artemis.baobabtree.BaobabTree;
 import de.artemis.baobabtree.common.entity.BaobabBoatEntity;
 import de.artemis.baobabtree.common.entity.BaobabChestBoatEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;

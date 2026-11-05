@@ -4,28 +4,30 @@ import de.artemis.baobabtree.BaobabTree;
 import de.artemis.baobabtree.common.registry.ModBlocks;
 import de.artemis.baobabtree.common.registry.ModItems;
 import de.artemis.baobabtree.common.registry.ModTags;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
+
+import java.util.function.Consumer;
+
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
+
 
 public class ModRecipeProvider extends RecipeProvider {
-    public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries);
+    public ModRecipeProvider(PackOutput output) {
+        super(output);
     }
 
     @Override
-    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
+    public void buildRecipes(@NotNull Consumer<FinishedRecipe> recipeOutput) {
         planksFromLogs(recipeOutput, ModBlocks.BAOBAB_PLANKS.get(), ModTags.Items.BAOBAB_LOGS, 2);
         woodFromLogs(recipeOutput, ModBlocks.BAOBAB_WOOD.get(), ModBlocks.BAOBAB_LOG.get());
         woodFromLogs(recipeOutput, ModBlocks.STRIPPED_BAOBAB_WOOD.get(), ModBlocks.STRIPPED_BAOBAB_LOG.get());
@@ -71,7 +73,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.BAOBAB_SAPLING.get())
                 .requires(ModItems.BAOBAB_FRUIT.get(), 4)
                 .unlockedBy(getHasName(ModItems.BAOBAB_FRUIT.get()), has(ModItems.BAOBAB_FRUIT.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, "baobab_sapling_from_fruit"));
+                .save(recipeOutput, new ResourceLocation(BaobabTree.MOD_ID, "baobab_sapling_from_fruit"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModBlocks.BAOBAB_LITTER.get(), 2)
                 .requires(ModBlocks.BAOBAB_LEAVES.get())
@@ -87,21 +89,21 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, Blocks.HANGING_ROOTS)
                 .requires(ModBlocks.TREE_ROOT.get())
                 .unlockedBy(getHasName(ModBlocks.TREE_ROOT.get()), has(ModBlocks.TREE_ROOT.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, "hanging_roots_from_tree_root"));
+                .save(recipeOutput, new ResourceLocation(BaobabTree.MOD_ID, "hanging_roots_from_tree_root"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.BAOBAB_FRUIT.get(), 2)
                 .requires(ModBlocks.SMALL_BAOBAB_FRUIT_POD.get())
                 .unlockedBy(getHasName(ModBlocks.SMALL_BAOBAB_FRUIT_POD.get()), has(ModBlocks.SMALL_BAOBAB_FRUIT_POD.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, "baobab_fruit_from_small_pod"));
+                .save(recipeOutput, new ResourceLocation(BaobabTree.MOD_ID, "baobab_fruit_from_small_pod"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.BAOBAB_FRUIT.get(), 4)
                 .requires(ModBlocks.MEDIUM_BAOBAB_FRUIT_POD.get())
                 .unlockedBy(getHasName(ModBlocks.MEDIUM_BAOBAB_FRUIT_POD.get()), has(ModBlocks.MEDIUM_BAOBAB_FRUIT_POD.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, "baobab_fruit_from_medium_pod"));
+                .save(recipeOutput, new ResourceLocation(BaobabTree.MOD_ID, "baobab_fruit_from_medium_pod"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.BAOBAB_FRUIT.get(), 6)
                 .requires(ModBlocks.LARGE_BAOBAB_FRUIT_POD.get())
                 .unlockedBy(getHasName(ModBlocks.LARGE_BAOBAB_FRUIT_POD.get()), has(ModBlocks.LARGE_BAOBAB_FRUIT_POD.get()))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(BaobabTree.MOD_ID, "baobab_fruit_from_large_pod"));
+                .save(recipeOutput, new ResourceLocation(BaobabTree.MOD_ID, "baobab_fruit_from_large_pod"));
     }
 }

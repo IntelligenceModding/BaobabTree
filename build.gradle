@@ -1,37 +1,41 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[7.0.3,8)'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'idea'
 }
 version = "${mod_version}-forge-mc${minecraft_version}"
 group = mod_group_id
 base { archivesName = mod_id }
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 minecraft {
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    copyIdeResources = true
     mappings channel: 'official', version: minecraft_version
     runs {
-        configureEach { workingDir = layout.projectDirectory.dir('run'); mods { "${mod_id}" { source sourceSets.main } } }
-        register('client')
-        register('server') { args '--nogui' }
-        register('gameTestServer')
-        register('data') {
-            args '--mod', mod_id, '--all', '--output', layout.projectDirectory.dir('src/generated/resources'), '--existing', layout.projectDirectory.dir('src/main/resources')
+        configureEach {
+            workingDirectory project.file('run')
+            mods { "${mod_id}" { source sourceSets.main } }
+        }
+        client {}
+        server { args '--nogui' }
+        gameTestServer {}
+        data {
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources').absolutePath, '--existing', file('src/main/resources').absolutePath
         }
     }
 }
 repositories {
-    minecraft.mavenizer(it)
-    maven fg.forgeMaven
-    maven fg.minecraftLibsMaven
+
     mavenCentral()
     maven { url = 'https://maven.blamejared.com/' }
 }
 dependencies {
-    implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
-    compileOnly "mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 }
 def replaceProperties = [minecraft_version_range: minecraft_version_range, forge_version_range: forge_version_range, loader_version_range: loader_version_range, mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version, mod_authors: mod_authors, mod_description: mod_description]
 tasks.named('processResources', ProcessResources) {
@@ -43,6 +47,4 @@ tasks.register('runClientData') { dependsOn 'runData' }
 publishing { publications { mavenJava(MavenPublication) { from components.java } } }
 idea { module { downloadSources = true } }
 
-
-// Forge scans each development output directory as a mod; keep classes and metadata together.
-sourceSets.main.output.resourcesDir = layout.buildDirectory.dir('classes/java/main').get().asFile
+tasks.named('jar', Jar).configure { finalizedBy 'reobfJar' }
